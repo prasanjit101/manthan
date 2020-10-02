@@ -1,7 +1,7 @@
 ![Logo of the project](https://raw.githubusercontent.com/jehna/readme-best-practices/master/sample-logo.png)
 
-# Mathan
-> Additional information or tagline
+# Manthan
+    उत्तिष्ठत जाग्रत प्राप्य वरान्निबोधत ।
 
 ## Problem Statement
 
@@ -22,13 +22,17 @@
 [Android App for students and teachers]() and [Web app for teachers to add tests]().
 
 ## Installing on Local Host
-- ### `git clone https://github.com/prasanjit101/manthan.git`
+- `git clone https://github.com/prasanjit101/manthan.git`
+        
         Clone the git repository in your system.
-- ### `npm install`
+- `npm install`
+
         Install required dependencies.
-- ### `npm start`
+- `npm start`
+
         Runs the app in the development mode.
-- ### Download app from [here]()
+- Download app from [here]()
+
         Android app to give online tests.
 
 ## Screenshots
