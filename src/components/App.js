@@ -28,7 +28,7 @@ class App extends Component {
       <Navbar.Toggle />
       <Navbar.Collapse className="justify-content-end">
       <Nav>
-      <Nav.Link id="nav-link" href="/"><span>Create</span></Nav.Link>
+      <Nav.Link id="nav-link" href="/"><span>Create Classroom</span></Nav.Link>
       <GoogleBtn onlogin={this.onlogin}/>
       </Nav>
       </Navbar.Collapse>
