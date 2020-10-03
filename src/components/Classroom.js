@@ -1,4 +1,6 @@
+// IN THIS COMPONENT TEACHER WILL ADD TEST AND CHECK SCORES AND QUESTIONS OF ADDED TESTS 
 import React, { Component } from 'react';
+//import Test from './Test';
 import './App.css';
 import {Navbar,Nav,NavDropdown,Modal,Form,Button,Row,Col} from 'react-bootstrap';
 import GoogleBtn from './Login'
@@ -209,7 +211,7 @@ function App(props) {
     </>
   );
 } 
-class Classsroom extends Component {
+class Classroom extends Component {
   state = {
     modalShow:false,
     Tests:[],
@@ -220,22 +222,6 @@ class Classsroom extends Component {
   constructor(props) {
     super(props);
     this.onlogin = this.onlogin.bind(this);
-
-  } 
-  setModalShow(flag){
-    this.setState({modalShow:flag});
-  }
-  onlogin(profile){
-    this.setState({isLoggedin:true, userdata:profile})
-    console.log('ID: ' + this.state.userdata.getId()); // Do not send to your backend! Use an ID token instead.
-    console.log('Name: ' + this.state.userdata.getName());
-    console.log('Image URL: ' + this.state.userdata.getImageUrl());
-    console.log('Email: ' + this.state.userdata.getEmail()); // This is null if the 'email' scope is not present.
-  }
-  SetClassrooms(){
-    let classrooms=this.userdata.classrooms;
-    console.log(classrooms)
-    this.setState({classrooms:classrooms});
   }
   render() {
     return (
@@ -297,4 +283,4 @@ class Classsroom extends Component {
   }
 }
 
-export default Classsroom;
+export default Classroom;
