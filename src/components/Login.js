@@ -16,7 +16,7 @@ class GoogleBtn extends Component {
     };
 
     this.login = this.login.bind(this);
-    this.handleLoginFailure = this.handleLoginFailure.bind(this); 
+    this.handleLoginFailure = this.handleLoginFailure.bind(this);
     this.logout = this.logout.bind(this);
     this.handleLogoutFailure = this.handleLogoutFailure.bind(this);
   } 

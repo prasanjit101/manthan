@@ -55,7 +55,6 @@
       font-size: 35px !important;
     color: #5017b9; }
 
-
     #dropdown-basic{
         background-color: transparent !important;
         border: none;
@@ -66,32 +65,15 @@
         border-radius: 60px;
         z-index: 1;
     }
-    #contain{
-        max-width: 1300px;
-        padding-top: 25px;
-    }
    #jumbo{
-    background-color: #1818188e !important;
+    background-color: #00000065 !important;
        background-image: url('./img.svg');
        background-size: cover;
-       max-width: 400px;
-       min-width: 400px;
        background-blend-mode: darken;
        color: white;
-       font-weight: bolder;
        font-family: "Raleway", sans-serif;
        margin: 15px;
        -webkit-box-shadow: 13px 13px 5px 0px rgba(66,54,66,0.8);
 -moz-box-shadow: 13px 13px 5px 0px rgba(66,54,66,0.8);
 box-shadow: 13px 13px 5px 0px rgba(66, 54, 66, 0.8);
-   }
-   #jumbo a{
-    color: white;
-    font-weight: bolder;
-    font-family: "Raleway", sans-serif;
-   }
-   #jumbo p {
-    font-weight: bolder;
-    font-size: large;
-    font-family: "Raleway", sans-serif;
    }
