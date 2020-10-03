@@ -1,8 +1,8 @@
 //THIS COMONENTS HAVE CARDS OF EVERY CLASS OF A TEACHER
 import React, { Component } from 'react';
-import {firestore} from '../firebase'
+import {db} from '../firebase'
 import {Container,Row,Jumbotron} from 'react-bootstrap';
-import { useCollection } from 'react-firebase-hooks/firestore';
+import { useCollection } from 'react-firebase-hooks/database';
 
 class Main extends Component {
 	
@@ -11,12 +11,13 @@ class Main extends Component {
     classrooms:[]
   }
   SetClassrooms(){
-	 const classref=firestore.collection('Educator1').doc('1234@gmail.com');
+	  
+	const classref=firestore.collection('Educator1').doc('1234@gmail.com').collection;
 	classref.get().then((doc) => {
         if (doc.exists) {
             let classrooms = doc.data();
             this.setState({ classrooms: classrooms });
-            console.log("Document data:", classrooms);
+            console.log("Document data:"+ classrooms);
         } else {
             this.setState({ data: null });
             console.log("No such document!");
@@ -80,12 +81,8 @@ class Main extends Component {
                   <>
 
                   <div className="classroom-card col-md-9 ml-auto mr-auto" key={key}>
-                  <Jumbotron id="jumbo">
-                    <a href={{pathname: `/${this.state.userData}/classroom/${classroom.code}`}}><h1>{classroom.name}</h1></a>
-                    <p>
-                    {classroom.code}
-                    </p>
-                  </Jumbotron>
+                    <a href={{pathname: `/classroom/${classroom._id}`}}> <h1 className= "header">{classroom.name}</h1></a>  
+                      <small className="code">{classroom.code}</small>
                   </div>
                   </>
                 )
