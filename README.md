@@ -21,7 +21,7 @@
 - ### Android Studio
 
 ## Live App 
-[Android App for students and teachers]() and [Web app for teachers to add tests]().
+[Android App for students and teachers]() and [Web app for teachers to add tests](https://manthan-app.herokuapp.com/).
 
 ## Installing on Local Host
 - ### `git clone https://github.com/prasanjit101/manthan.git`
