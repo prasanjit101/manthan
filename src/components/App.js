@@ -3,6 +3,8 @@ import './App.css';
 import {Navbar,Nav,Modal,Form,Button,Row,Col} from 'react-bootstrap';
 import GoogleBtn from './Login'
 import Main from './Main';
+import {db} from '../firebase';
+import {useList} from 'react-firebase-hooks/database';
 
 function CreateClassModal(props) {
   return (
@@ -63,7 +65,7 @@ function ClassModal(props) {
 class App extends Component {
   state = {
     userdata : [],
-    Classroom:[],
+    Classrooms:[],
     isLoggedin: false
   }
   constructor(props) {
@@ -83,11 +85,13 @@ class App extends Component {
   }
 
   createClass(Name,Code){
-    console.log(Name);
-    console.log(Code);
-    console.log('ID: ' + this.state.userdata.getId());
-  }
+
+/* 	db.ref(this.state.userdata.getId()).child(Code).set({students:{a},Class:{a}});
+ */  }
   GetClass(){
+	db.ref(this.state.userdata.getId()).child('CO205').on('value', function(snapshot) {
+	this.state.Classrooms=snapshot.val();
+	console.log(this.state.Classrooms)});
 
   }
   render() {

@@ -1,8 +1,8 @@
 //THIS COMONENTS HAVE CARDS OF EVERY CLASS OF A TEACHER
 import React, { Component } from 'react';
-import {firestore} from '../firebase'
+import {db} from '../firebase'
 import {Container,Row,Jumbotron} from 'react-bootstrap';
-import { useCollection } from 'react-firebase-hooks/firestore';
+import { useCollection } from 'react-firebase-hooks/database';
 
 class Main extends Component {
 	
