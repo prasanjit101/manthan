@@ -251,7 +251,7 @@ class Classsroom extends Component {
 	var testCode='test01';
 	//the variable code is the classroom code of the teacher and testCode is the test code
 	
-	db.ref('educator').child(emailId).child(code).child('test').child(testCode).set({ done:0, duration:duration, maxNumber:max, questions:inputList});
+	db.ref('educator').child(emailId).child(code).child('test').child(testCode).set({ done:0, description: description, duration:duration, maxNumber:max, questions:inputList});
   }
   setModalShow(flag){
     this.setState({modalShow:flag});
