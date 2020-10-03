@@ -92,7 +92,6 @@ class App extends Component {
 	db.ref(this.state.userdata.getId()).child('CO205').on('value', function(snapshot) {
 	this.state.Classrooms=snapshot.val();
 	console.log(this.state.Classrooms)});
-
   }
   render() {
     return (
