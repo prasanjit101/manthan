@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 import {Navbar,Nav,NavDropdown,Modal,Form,Button,Row,Col} from 'react-bootstrap';
-import GoogleBtn from './Login'
+import GoogleBtn from './Login';
+import {db} from '../firebase'
+
 
 import { useState } from "react";
 
@@ -266,12 +268,16 @@ class Classsroom extends Component {
   constructor(props) {
     super(props);
     this.onlogin = this.onlogin.bind(this);
+	this.createTest= this.createTest.bind(this);
   } 
   createTest(Name,Duration,Max,inputList){
-    console.log(Name);
-    console.log(Duration);
-    console.log(Max);
-    console.log(inputList);
+	  
+	var emailId= this.state.userdata.getEmail().replaceAll(".","dot");
+	var code='CO205';
+	var testCode='test01';
+	//the variable code is the classroom code of the teacher and testCode is the test code
+	
+	db.ref(this.state.userdata.getName()).child(emailId).child(code).child("Class").child(testCode).set({name:Name,duration:Duration,maxnumber:Max,questions:inputList});
   }
   setModalShow(flag){
     this.setState({modalShow:flag});
