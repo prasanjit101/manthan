@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
-import {Navbar,Nav,Modal,Form,Button,Row,Col} from 'react-bootstrap';
+import {Navbar,Nav} from 'react-bootstrap';
 import GoogleBtn from './Login'
 import Main from './Main';
 
+<<<<<<< HEAD
 function CreateClassModal(props) {
   return (
     <Modal
@@ -61,6 +62,8 @@ function ClassModal(props) {
     </>
   );
 }
+=======
+>>>>>>> c5040c251dddc2ac1035982c7b00c551fd4648a5
 class App extends Component {
   state = {
     userdata : [],
@@ -96,7 +99,11 @@ class App extends Component {
       <Navbar.Toggle />
       <Navbar.Collapse className="justify-content-end">
       <Nav>
+<<<<<<< HEAD
       <ClassModal createClass={this.createClass}/>
+=======
+      <Nav.Link id="nav-link" href="/"><span>Create</span></Nav.Link>
+>>>>>>> c5040c251dddc2ac1035982c7b00c551fd4648a5
       <GoogleBtn onlogin={this.onlogin}/>
       </Nav>
       </Navbar.Collapse>
