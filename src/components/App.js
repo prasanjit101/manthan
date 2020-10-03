@@ -24,8 +24,8 @@ function SignIn() {
 function App() {
   var user = auth.currentUser;
   return (
-	{
-<>
+	{user ?
+	<>
 	<div>
         <Navbar sticky="top" bg="dark" id="navbar" variant="dark">
       <Navbar.Brand href="/"><img alt="logo" src="../logo.svg" width="70px"/> Manthan<span>.</span></Navbar.Brand>
@@ -39,7 +39,7 @@ function App() {
       </Navbar>
 	  <Main name = "user.displayName" email = "user.email" photoUrl = "user.photoURL" />
       </div>
-	  </>
+	  </>:<SignIn/>
 	   }
       
     );
