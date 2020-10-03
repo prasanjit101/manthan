@@ -13,7 +13,7 @@
 - We will provide an online android testing application which can be used to conduct tests wrapped with all necessary precautions so to reduce the chances of cheating. Here the educator will give some questions in his pannel(account) and all the questions will be randomly distributed among the students resulting in having infinite number of sets. And students have to attempt the test in their android device using Gmail ID's.
 
 ## Features
-- A secure online platform for online testing.
+- A secure platform for online testing.
 - Interactive and easy to use.
 - Grades can be accessed/ changed even after the completion of test.
 - Teacher can decide if a particular question is compulsary in all the tests or not.
