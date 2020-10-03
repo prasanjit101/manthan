@@ -99,7 +99,7 @@ function CreateTestModal(props) {
     </Modal>
   );
 }
-
+ 
 function TestModal() {
   const [modalShow, setModalShow] = React.useState(false);
 
@@ -250,7 +250,7 @@ class Classsroom extends Component {
                 return(
                   <>
                   <div className="classroom-card col-md-9 ml-auto mr-auto" key={key}>
-                  <NavDropdown.Item href={{pathname: `/${user_id}/classroom/${classroom.code}`}}>{classroom.Name}</NavDropdown.Item>
+                  <NavDropdown.Item href={{pathname: `/${this.state.userid}/classroom/${classroom.code}`}}>{classroom.Name}</NavDropdown.Item>
                   </div>
                   </>
                 )

@@ -51,8 +51,12 @@ class Main extends Component {
                   <>
 
                   <div className="classroom-card col-md-9 ml-auto mr-auto" key={key}>
-                    <a href={{pathname: `/${user_id}/classroom/${classroom.code}`}}> <h1 className= "header">{classroom.name}</h1></a>  
-                      <small className="code">{classroom.code}</small>
+                  <Jumbotron id="jumbo">
+                    <a href={{pathname: `/${this.state.userData}/classroom/${classroom.code}`}}><h1>{classroom.name}</h1></a>
+                    <p>
+                    {classroom.code}
+                    </p>
+                  </Jumbotron>
                   </div>
                   </>
                 )
