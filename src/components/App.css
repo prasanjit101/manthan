@@ -24,7 +24,7 @@
     height: 2px;
     bottom: 0;
     left: 0;
-    background: #17b978;
+    background: #5017b9;
     visibility: visible;
     -webkit-transform: scaleX(0);
     -moz-transform: scaleX(0);
@@ -54,3 +54,26 @@
   .navbar-brand span {
       font-size: 35px !important;
     color: #5017b9; }
+
+    #dropdown-basic{
+        background-color: transparent !important;
+        border: none;
+        border-radius: 60px !important ;
+        padding: 0;
+    }
+    #dropdown-basic img {
+        border-radius: 60px;
+        z-index: 1;
+    }
+   #jumbo{
+    background-color: #00000065 !important;
+       background-image: url('./img.svg');
+       background-size: cover;
+       background-blend-mode: darken;
+       color: white;
+       font-family: "Raleway", sans-serif;
+       margin: 15px;
+       -webkit-box-shadow: 13px 13px 5px 0px rgba(66,54,66,0.8);
+-moz-box-shadow: 13px 13px 5px 0px rgba(66,54,66,0.8);
+box-shadow: 13px 13px 5px 0px rgba(66, 54, 66, 0.8);
+   }
