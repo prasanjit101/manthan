@@ -13,7 +13,7 @@ function CreateTestModal(props) {
   const handleInputChange = (e, index) => {
     const { name, value } = e.target;
     const list = [...inputList];
-    list[index][name] = value;
+    list[index][name] = value; 
     setInputList(list);
   };
   const handleRemoveClick = index => {
