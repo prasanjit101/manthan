@@ -208,17 +208,14 @@ function App(props) {
       />
     </>
   );
-}
-
-
- 
+} 
 class Classsroom extends Component {
   state = {
     modalShow:false,
     Tests:[],
-    userdata : [],
+    userid : this.props.user,
     isLoggedin: false,
-    classrooms:[]
+    classrooms:this.props.code
   }
   constructor(props) {
     super(props);
@@ -248,12 +245,12 @@ class Classsroom extends Component {
       <Navbar.Toggle />
       <Navbar.Collapse className="justify-content-end">
       <Nav className="mr-auto">
-      <NavDropdown title="Classrooms" id="basic-nav-dropdown ">
+      <NavDropdown title="Classrooms" id="basic-nav-dropdown nav-link">
       { this.state.classrooms.map((classroom, key) => {
                 return(
                   <>
                   <div className="classroom-card col-md-9 ml-auto mr-auto" key={key}>
-                  <NavDropdown.Item href={{pathname: `/classroom/${classroom._id}`}}>{classroom.Name}</NavDropdown.Item>
+                  <NavDropdown.Item href={{pathname: `/${user_id}/classroom/${classroom.code}`}}>{classroom.Name}</NavDropdown.Item>
                   </div>
                   </>
                 )
@@ -262,6 +259,17 @@ class Classsroom extends Component {
     </Nav>
       <Nav>
       <TestModal/>
+      <NavDropdown title="Notifications" id="basic-nav-dropdown nav-link">
+      { this.state.classrooms.map((classroom, key) => {
+                return(
+                  <>
+                  <div className="classroom-card col-md-9 ml-auto mr-auto" key={key}>
+                  <NavDropdown.Item>{classroom.Notification}</NavDropdown.Item>
+                  </div>
+                  </>
+                )
+              })}
+      </NavDropdown>
           {//THIS WILL CREATE A MODAL FORM TO CREATE NEW TEST
       }
       <GoogleBtn onlogin={this.onlogin}/>
