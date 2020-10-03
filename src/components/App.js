@@ -85,13 +85,17 @@ class App extends Component {
   }
 
   createClass(Name,Code){
-
-/* 	db.ref(this.state.userdata.getId()).child(Code).set({students:{a},Class:{a}});
- */  }
+	
+ }
   GetClass(){
+<<<<<<< HEAD
 	db.ref(this.state.userdata.getId()).child('CO205').on('value', function(snapshot) {
 	this.state.Classrooms=snapshot.val();
 	console.log(this.state.Classrooms)});
+=======
+	/* db.ref()
+	this.setState({Classrooms:}) */
+>>>>>>> 0c8c64f6d2be9d89ccaac97d229a0f033aa3ab20
   }
   render() {
     return (
