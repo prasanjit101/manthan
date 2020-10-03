@@ -1,49 +1,78 @@
 //THIS COMONENTS HAVE CARDS OF EVERY CLASS OF A TEACHER
 import React, { Component } from 'react';
+import {firestore} from '../firebase'
 import {Container,Row,Jumbotron} from 'react-bootstrap';
-
+import { useCollection } from 'react-firebase-hooks/firestore';
 
 class Main extends Component {
-
+	
   state={
     userData:[],
     classrooms:[]
   }
   SetClassrooms(){
-    let classrooms=this.props.classrooms;
-    console.log(classrooms)
-    this.setState({classrooms:classrooms,loading:false});
+	 const classref=firestore.collection('Educator1').doc('1234@gmail.com');
+	classref.get().then((doc) => {
+        if (doc.exists) {
+            let classrooms = doc.data();
+            this.setState({ classrooms: classrooms });
+            console.log("Document data:", classrooms);
+        } else {
+            this.setState({ data: null });
+            console.log("No such document!");
+        }
+    }).catch(function (error) {
+        this.setState({ data: null });
+        console.log("Error getting document:", error);
+    });
   }
 
   
   render() {
     return (
-      <Container id="contain">
+      <Container>
   <Row>
 
     <p>&nbsp;</p>
     <Jumbotron id="jumbo">
-    <a href="/classroom"><h1>Data Structures And Algorithms</h1></a>
-  
+  <h1>Class Name 1</h1>
   <p>
-    CS225
+    Class code
   </p>
 </Jumbotron><Jumbotron id="jumbo">
-<a href="/classroom"><h1>Graph Theory</h1></a>
+  <h1>Class Name</h1>
   <p>
-    CS307
+    Class code
   </p>
 </Jumbotron><Jumbotron id="jumbo">
-<a href="/classroom"><h1>Machine Learning</h1></a>
-  
+  <h1>Class Name</h1>
   <p>
-    CS608
+    Class code
   </p>
 </Jumbotron><Jumbotron id="jumbo">
-<a href="/classroom"><h1>Disrete Mathematics</h1></a>
-  
+  <h1>Class Name</h1>
   <p>
-    CS205
+    Class code
+  </p>
+</Jumbotron><Jumbotron id="jumbo">
+  <h1>Class Name</h1>
+  <p>
+    Class code
+  </p>
+</Jumbotron><Jumbotron id="jumbo">
+  <h1>Class Name</h1>
+  <p>
+    Class code
+  </p>
+</Jumbotron><Jumbotron id="jumbo">
+  <h1>Class Name</h1>
+  <p>
+    Class code
+  </p>
+</Jumbotron><Jumbotron id="jumbo">
+  <h1>Class Name</h1>
+  <p>
+    Class code
   </p>
 </Jumbotron>
               { this.state.classrooms.map((classroom, key) => {
@@ -51,7 +80,7 @@ class Main extends Component {
                   <>
 
                   <div className="classroom-card col-md-9 ml-auto mr-auto" key={key}>
-                    <a href={{pathname: `/${user_id}/classroom/${classroom.code}`}}> <h1 className= "header">{classroom.name}</h1></a>  
+                    <a href={{pathname: `/classroom/${classroom._id}`}}> <h1 className= "header">{classroom.name}</h1></a>  
                       <small className="code">{classroom.code}</small>
                   </div>
                   </>
