@@ -13,7 +13,6 @@ class Example extends Component {
       <Navbar.Collapse className="justify-content-end">
       <Nav>
       <Nav.Link id="nav-link" href="/"><span>Create</span></Nav.Link>
-      <Nav.Link id="nav-link" href="/login"><span>Login</span></Nav.Link>
       <GoogleBtn/>
       </Nav>
       </Navbar.Collapse>
