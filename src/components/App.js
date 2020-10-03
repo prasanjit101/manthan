@@ -85,8 +85,15 @@ class App extends Component {
   }
 
   createClass(Name,Code){
-	
- }
+
+    var id = this.state.userdata.getEmail() + "";
+    var emailId = id.replaceAll(".", "Dot");
+    var subCode = (Code+"").toLowerCase();
+
+   db.ref("educator").child(emailId).child(subCode).child("class").set({name: this.state.userdata.getName() ,email: this.state.userdata.getEmail()
+    , className: Name, classCode: Code});  
+  }
+  
   GetClass(){
 	/* db.ref()
 	this.setState({Classrooms:}) */
