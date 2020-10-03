@@ -5,7 +5,6 @@ import GoogleBtn from './Login'
 import Main from './Main';
 import {auth} from '../firebase';
 
-
 function SignIn() {
 
   const signInWithGoogle = () => {
