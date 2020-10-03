@@ -2,11 +2,18 @@ import React, { Component } from 'react';
 import './App.css';
 import {Navbar,Nav,NavDropdown,Modal,Form,Button,Row,Col} from 'react-bootstrap';
 import GoogleBtn from './Login'
-import Main from './Main';
 
 import { useState } from "react";
+
 function CreateTestModal(props) {
   const [inputList, setInputList] = useState([{Question:"",Option1:"",Option2:"",Option3:"",Option4:"",Answer:"",Marks:2}]);
+  const [rulesList, setRulesList] = useState([{Start:"",End:"",Number:""}]);
+  const handleInputChange = (e, index) => {
+    const { name, value } = e.target;
+    const list = [...inputList];
+    list[index][name] = value;
+    setInputList(list);
+  };
     const handleRemoveClick = index => {
       const list = [...inputList];
       list.splice(index, 1);
@@ -31,43 +38,57 @@ function CreateTestModal(props) {
           <Modal.Body>
           <Form onSubmit={(event) => {
                       event.preventDefault()
-                      const heading = document.getElementById("TestName").value
-                      const content = document.getElementById("postContent").value
+                      const Name = document.getElementById("TestName").value
+                      const Duration = document.getElementById("Duration").value
+                      const Max = document.getElementById("Max").value
                       
-                      let x = props.createPost(heading, content)
+                      let x = props.createTest(Name,Duration,Max,inputList)
                       props.onHide();
                     }}>
             <Form.Group controlId="formBasicText">
-              <Form.Control id="TestName" type="text" className="form-control" placeholder="Test Name" required />
+              <Form.Control id="TestName" type="text" className="form-control" placeholder="Test Name"  required />
             </Form.Group>
+            <Row>
+              <Col>
+              <Form.Group controlId="formBasicText">
+              <Form.Control id="Duration" type="text" className="form-control" Value="hr:min:sec" required />
+            </Form.Group>
+            </Col>
+            <Col>
+            <Form.Group controlId="formBasicText">
+              <Form.Control id="Max" type="number" className="form-control" placeholder="Maximum Marks" required />
+            </Form.Group>
+              </Col>
+            </Row>
         {inputList.map((x, i) => {
           return (
             <Form.Group controlId="formBasicText">
-            <Form.Control id="postContent" type="text" className="form-control" placeholder="Enter the question." required value={x.Question}/>
+              <Form.Label>Question</Form.Label>
+            <Form.Control id="Question" name="Question" type="text" className="form-control" placeholder="Enter the question."  required onChange={e => handleInputChange(e, i)} />
             <br/>
             <Row>
               <Col>
-            <Form.Control placeholder="Option 1" required value={x.Option1} />
+            <Form.Control placeholder="Option 1" name="Option1" required  onChange={e => handleInputChange(e, i)} />
             </Col>
             <Col>
-            <Form.Control placeholder="Option 2" required value={x.Option2} />
+            <Form.Control placeholder="Option 2" name="Option2" required   onChange={e => handleInputChange(e, i)} />
             </Col>
             </Row><br/>
             <Row>
               <Col>
-            <Form.Control placeholder="Option 3" required value={x.Option3}/>
+            <Form.Control placeholder="Option 3"name="Option3" required  onChange={e => handleInputChange(e, i)} />
             </Col>
             <Col>
-            <Form.Control placeholder="Option 4" required value={x.Option4} />
+            <Form.Control placeholder="Option 4" name="Option4" required  onChange={e => handleInputChange(e, i)} />
             </Col>
             </Row>
             <br/>
             <Row>
               <Col>
-            <Form.Control placeholder="Answer" required value={x.Answer}/>
+            <Form.Control placeholder="Answer" name="Answer" required  onChange={e => handleInputChange(e, i)} />
             </Col>
             <Col>
-            <Form.Control placeholder="Marks" required value={x.Marks}/>
+            <Form.Control type="number" name="Marks" placeholder="Marks" required  onChange={e => handleInputChange(e, i)} />
             </Col>
             </Row>
             <br/>
@@ -97,7 +118,7 @@ function CreateTestModal(props) {
   );
 }
 
-function TestModal() {
+function TestModal(props) {
   const [modalShow, setModalShow] = React.useState(false);
 
   return (
@@ -105,6 +126,7 @@ function TestModal() {
       <Nav.Link id="nav-link"  onClick={() =>  setModalShow(true)}><span> Create Test</span></Nav.Link>
       <CreateTestModal
         show={modalShow}
+        createTest={props.createTest}
         onHide={() => setModalShow(false)}
       />
     </>
@@ -219,6 +241,12 @@ class Classsroom extends Component {
     super(props);
     this.onlogin = this.onlogin.bind(this);
   } 
+  createTest(Name,Duration,Max,inputList){
+    console.log(Name);
+    console.log(Duration);
+    console.log(Max);
+    console.log(inputList);
+  }
   setModalShow(flag){
     this.setState({modalShow:flag});
   }
@@ -254,7 +282,7 @@ class Classsroom extends Component {
               </NavDropdown>
             </Nav>
             <Nav>
-              <TestModal/>
+              <TestModal createTest={this.createTest}/>
               <GoogleBtn onlogin={this.onlogin}/>
             </Nav>
           </Navbar.Collapse>
