@@ -14,7 +14,7 @@ class Main extends Component {
   
   render() {
     return (
-            <div className="content mr-auto ml-auto">
+            <div className="conatainer">
               <p>&nbsp;</p>
               <div className="classroom-card col-md-9 ml-auto mr-auto">
                     <a href={{pathname: `/classroom/${55}`}}> <h1 className= "header">classroom.name</h1></a>  

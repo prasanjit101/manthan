@@ -5,13 +5,18 @@ class Example extends Component {
 
   render() {
     return (
-        <Navbar bg="dark" variant="dark">
-        <Navbar.Brand href="/">Navbar</Navbar.Brand>
-        <Nav className="mr-auto">
-          <Nav.Link href="/">Home</Nav.Link>
-          <Nav.Link href="/login">Login</Nav.Link>
-        </Nav>
-      </Navbar>
+        
+      <Navbar sticky="top" bg="dark" id="navbar" variant="dark">
+      <Navbar.Brand href="/"><img src="../logo.svg" width="70px"/> Manthan<span>.</span></Navbar.Brand>
+      <Navbar.Toggle />
+      <Navbar.Collapse className="justify-content-end">
+      <Nav>
+      <Nav.Link id="nav-link" href="/"><span>Create</span></Nav.Link>
+      <Nav.Link id="nav-link" href="/login"><span>Login</span></Nav.Link>
+      
+      </Nav>
+      </Navbar.Collapse>
+    </Navbar>
     );
   }
 }
