@@ -15,24 +15,24 @@ function CreateClassModal(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Modal heading
+         Create Classroom
         </Modal.Title>
       </Modal.Header>
        <Form onSubmit={(event) => {
                       event.preventDefault()
-                      const heading = document.getElementById("TestName").value
-                      const content = document.getElementById("postContent").value
+                      const Name = document.getElementById("Name").value
+                      const Code = document.getElementById("Code").value
                       
-                      let x = props.createPost(heading, content)
+                      let x = props.createClass(Name, Code)
                       props.onHide();
                     }}>
           <Modal.Body>
             <Form.Group controlId="formBasicText">
-              <Form.Control id="TestName" type="text" className="form-control" placeholder="Test Name" required />
+              <Form.Control id="Name" type="text" className="form-control" placeholder="Class Name" required />
               
             </Form.Group>
             <Form.Group controlId="formBasicText">
-              <Form.Control id="TestName" type="text" className="form-control" placeholder="Test Name" required />
+              <Form.Control id="Code" type="text" className="form-control" placeholder="Class Code" required />
               
             </Form.Group>
         </Modal.Body>
@@ -47,7 +47,7 @@ function CreateClassModal(props) {
   );
 }
  
-function ClassModal() {
+function ClassModal(props) {
   const [modalShow, setModalShow] = React.useState(false);
 
   return (
@@ -55,6 +55,7 @@ function ClassModal() {
       <Nav.Link id="nav-link"  onClick={() =>  setModalShow(true)}><span> Create Classroom </span></Nav.Link>
       <CreateClassModal
         show={modalShow}
+        createClass = {props.createClass}
         onHide={() => setModalShow(false)}
       />
     </>
@@ -71,11 +72,22 @@ class App extends Component {
   } 
   onlogin(profile){
     this.setState({isLoggedin:true, userdata:profile})
+    //check user  
+    //or
+    // Add user
+
     console.log('ID: ' + this.state.userdata.getId()); // Do not send to your backend! Use an ID token instead.
     console.log('Name: ' + this.state.userdata.getName());
     console.log('Image URL: ' + this.state.userdata.getImageUrl());
     console.log('Email: ' + this.state.userdata.getEmail()); // This is null if the 'email' scope is not present.
   }
+
+
+  createClass(user,Name,Code){
+
+  }
+
+
   render() {
     return (
       <div>
@@ -84,7 +96,7 @@ class App extends Component {
       <Navbar.Toggle />
       <Navbar.Collapse className="justify-content-end">
       <Nav>
-      <ClassModal/>
+      <ClassModal createClass={this.createClass}/>
       <GoogleBtn onlogin={this.onlogin}/>
       </Nav>
       </Navbar.Collapse>
