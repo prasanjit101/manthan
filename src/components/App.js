@@ -45,8 +45,7 @@ function CreateClassModal(props) {
           </Form>
     </Modal>
   );
-}
- 
+} 
 function ClassModal(props) {
   const [modalShow, setModalShow] = React.useState(false);
 
@@ -64,37 +63,38 @@ function ClassModal(props) {
 class App extends Component {
   state = {
     userdata : [],
+    Classroom:[],
     isLoggedin: false
   }
   constructor(props) {
     super(props);
     this.onlogin = this.onlogin.bind(this);
+    this.createClass = this.createClass.bind(this);
   } 
   onlogin(profile){
     this.setState({isLoggedin:true, userdata:profile})
     //check user  
     //or
     // Add user
-
     console.log('ID: ' + this.state.userdata.getId()); // Do not send to your backend! Use an ID token instead.
     console.log('Name: ' + this.state.userdata.getName());
     console.log('Image URL: ' + this.state.userdata.getImageUrl());
     console.log('Email: ' + this.state.userdata.getEmail()); // This is null if the 'email' scope is not present.
   }
 
-
   createClass(Name,Code){
-
+    console.log(Name);
+    console.log(Code);
+    console.log('ID: ' + this.state.userdata.getId());
   }
   GetClass(){
-    
-  }
 
+  }
   render() {
     return (
       <div>
-        <Navbar sticky="top" bg="dark" id="navbar" variant="dark">
-      <Navbar.Brand href="/"><img src="../logo.svg" width="70px"/> Manthan<span>.</span></Navbar.Brand>
+      <Navbar sticky="top" bg="dark" id="navbar" variant="dark">
+      <Navbar.Brand href="/"><img src="../logo.svg" width="70px"/> Manthan<span>. </span></Navbar.Brand>
       <Navbar.Toggle />
       <Navbar.Collapse className="justify-content-end">
       <Nav>
@@ -103,8 +103,7 @@ class App extends Component {
       </Nav>
       </Navbar.Collapse>
       </Navbar>
-        <Main userdata={this.state.userdata}/>
-        
+      <Main userdata={this.state.userdata}/>        
       </div>
     );
   }

@@ -18,7 +18,7 @@ class Main extends Component {
 
     <p>&nbsp;</p>
     <Jumbotron id="jumbo">
-  <h1>Class Name 1</h1>
+    <a href="/classroom"><h1>Class Name</h1></a>
   <p>
     Class code
   </p>
