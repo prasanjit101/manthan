@@ -8,13 +8,8 @@ import {db} from '../firebase'
 import { useState } from "react";
 
 function CreateTestModal(props) {
-<<<<<<< HEAD
-  const [inputList, setInputList] = useState([{Question:"",Option1:"",Option2:"",Option3:"",Option4:"",Answer:"",Marks:2,Type:"1"}]);
-  const [rulesList, setRulesList] = useState([{Type:"1",Number:-1}]);
-=======
   const [inputList, setInputList] = useState([{question:"",option1:"",option2:"",option3:"",option4:"",answer:"",marks:2}]);
-  const [rulesList, setRulesList] = useState([{Start:"",End:"",Number:""}]);
->>>>>>> 0c8c64f6d2be9d89ccaac97d229a0f033aa3ab20
+  const [rulesList, setRulesList] = useState([{start:"",end:"",number:""}]);
   const handleInputChange = (e, index) => {
     const { name, value } = e.target;
     const list = [...inputList];
@@ -25,10 +20,6 @@ function CreateTestModal(props) {
       const list = [...inputList];
       list.splice(index, 1);
       setInputList(list);
-<<<<<<< HEAD
-  };
-  const handleAddClick = () => {
-      setInputList([...inputList, {Question:"",Option1:"",Option2:"",Option3:"",Option4:"",Answer:"",Marks:2,Type:"1"}]);
   };
   const handleRuleChange = (e, index) => {
     const { name, value } = e.target;
@@ -44,12 +35,9 @@ function CreateTestModal(props) {
   const handleAddRule = () => {
       setRulesList([...rulesList, {Type:"1",Number:-1}]);
   };
-=======
-    };
-    const handleAddClick = () => {
-      setInputList([...inputList, {question:"",option1:"",option2:"",option3:"",option4:"",answer:"",marks:2}]);
-    };
->>>>>>> 0c8c64f6d2be9d89ccaac97d229a0f033aa3ab20
+  const handleAddClick = () => {
+    setInputList([...inputList, {question:"",option1:"",option2:"",option3:"",option4:"",answer:"",marks:2}]);
+  };
   return (
     <Modal
       {...props}
@@ -159,84 +147,11 @@ function CreateTestModal(props) {
                       
                       let x = props.createTest(Name,Duration,Max,inputList)
                       props.onHide();
-<<<<<<< HEAD
         }}>
             Submit
           </Button>
         <Button onClick={props.onHide}>Close</Button>
       </Modal.Footer>
-=======
-                    }}>
-            <Form.Group controlId="formBasicText">
-              <Form.Control id="TestName" type="text" className="form-control" placeholder="Test Name"  required />
-            </Form.Group>
-            <Row>
-              <Col>
-              <Form.Group controlId="formBasicText">
-              <Form.Control id="Duration" type="text" className="form-control" Value="hr:min:sec" required />
-            </Form.Group>
-            </Col>
-            <Col>
-            <Form.Group controlId="formBasicText">
-              <Form.Control id="Max" type="number" className="form-control" placeholder="Maximum Marks" required />
-            </Form.Group>
-              </Col>
-            </Row>
-        {inputList.map((x, i) => {
-          return (
-            <Form.Group controlId="formBasicText">
-              <Form.Label>Question</Form.Label>
-            <Form.Control id="Question" name="Question" type="text" className="form-control" placeholder="Enter the question."  required onChange={e => handleInputChange(e, i)} />
-            <br/>
-            <Row>
-              <Col>
-            <Form.Control placeholder="option 1" name="option1" required  onChange={e => handleInputChange(e, i)} />
-            </Col>
-            <Col>
-            <Form.Control placeholder="option 2" name="option2" required   onChange={e => handleInputChange(e, i)} />
-            </Col>
-            </Row><br/>
-            <Row>
-              <Col>
-            <Form.Control placeholder="option 3"name="option3" required  onChange={e => handleInputChange(e, i)} />
-            </Col>
-            <Col>
-            <Form.Control placeholder="option 4" name="option4" required  onChange={e => handleInputChange(e, i)} />
-            </Col>
-            </Row>
-            <br/>
-            <Row>
-              <Col>
-            <Form.Control placeholder="answer" name="answer" required  onChange={e => handleInputChange(e, i)} />
-            </Col>
-            <Col>
-            <Form.Control type="number" name="marks" placeholder="marks" required  onChange={e => handleInputChange(e, i)} />
-            </Col>
-            </Row>
-            <br/>
-            <Row>
-            <Col>
-            {inputList.length !== 1 && <Button
-                  className="mr10"
-                  onClick={() => handleRemoveClick(i)}>Remove</Button>}
-            </Col>
-            <Col>
-            {inputList.length - 1 === i && <Button onClick={handleAddClick}>Add</Button>}
-            </Col>
-            </Row>
-            </Form.Group>
-          );
-        })}
-         <Button variant="primary" type="submit">
-              Submit
-            </Button>
-        </Form>
-        </Modal.Body>
-          <Modal.Footer>
-         
-            <Button onClick={props.onHide}>Close</Button>
-          </Modal.Footer>
->>>>>>> 0c8c64f6d2be9d89ccaac97d229a0f033aa3ab20
     </Modal>
   );
 }
@@ -280,24 +195,12 @@ function MyVerticallyCenteredModal(props) {
               { props.Marks.map((i, key) => {
                 return(
                   <>
-<<<<<<< HEAD
                     <li>
                       <div className="classroom-card col-md-9 ml-auto mr-auto" key={key}>
                         <h3>{i.name}</h3>  
                         <p>{i.Marks}</p>                                    
                       </div>
                     </li>
-=======
-                  <li>
-                    <div className="classroom-card col-md-9 ml-auto mr-auto" key={key}>
-
-                  <h3>{i.name}</h3>  
-                  <p>{i.marks}</p>
-                    
-                  
-                  </div>
-                  </li>
->>>>>>> 0c8c64f6d2be9d89ccaac97d229a0f033aa3ab20
                   </>
                 )
               })}
@@ -308,7 +211,6 @@ function MyVerticallyCenteredModal(props) {
               { props.Questions.map((i, key) => {
                 return(
                   <>
-<<<<<<< HEAD
                     <li>
                       <div className="classroom-card col-md-9 ml-auto mr-auto" key={key}>
                         <h3>{i.Question}</h3>
@@ -323,23 +225,6 @@ function MyVerticallyCenteredModal(props) {
                         </Row>                                    
                       </div>
                     </li>
-=======
-                  <li>
-                    <div className="classroom-card col-md-9 ml-auto mr-auto" key={key}>
-
-                  <h3>{i.question}</h3>
-                  <p>{i.marks}</p>  
-                  <Row>
-                    <Col>{i.option1}</Col>
-                    <Col>{i.option2}</Col>
-                  </Row>
-                  <Row>
-                    <Col>{i.option3}</Col>
-                    <Col>{i.option4}</Col>
-                  </Row>                                    
-                  </div>
-                  </li>
->>>>>>> 0c8c64f6d2be9d89ccaac97d229a0f033aa3ab20
                   </>
                 )
               })}

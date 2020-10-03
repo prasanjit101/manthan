@@ -39,7 +39,7 @@ function CreateClassModal(props) {
             </Form.Group>
         </Modal.Body>
           <Modal.Footer>
-          <Button variant="success" type="submit">
+          <Button variant="primary" type="submit">
               Submit
             </Button>
             <Button onClick={props.onHide}>Close</Button>
@@ -88,14 +88,8 @@ class App extends Component {
 	
  }
   GetClass(){
-<<<<<<< HEAD
-	db.ref(this.state.userdata.getId()).child('CO205').on('value', function(snapshot) {
-	this.state.Classrooms=snapshot.val();
-	console.log(this.state.Classrooms)});
-=======
 	/* db.ref()
 	this.setState({Classrooms:}) */
->>>>>>> 0c8c64f6d2be9d89ccaac97d229a0f033aa3ab20
   }
   render() {
     return (
