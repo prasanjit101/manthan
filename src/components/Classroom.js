@@ -6,26 +6,40 @@ import GoogleBtn from './Login'
 import { useState } from "react";
 
 function CreateTestModal(props) {
-  const [inputList, setInputList] = useState([{Question:"",Option1:"",Option2:"",Option3:"",Option4:"",Answer:"",Marks:2}]);
-  const [rulesList, setRulesList] = useState([{Start:"",End:"",Number:""}]);
+  const [inputList, setInputList] = useState([{Question:"",Option1:"",Option2:"",Option3:"",Option4:"",Answer:"",Marks:2,Type:"1"}]);
+  const [rulesList, setRulesList] = useState([{Type:"1",Number:-1}]);
   const handleInputChange = (e, index) => {
     const { name, value } = e.target;
     const list = [...inputList];
     list[index][name] = value;
     setInputList(list);
   };
-    const handleRemoveClick = index => {
+  const handleRemoveClick = index => {
       const list = [...inputList];
       list.splice(index, 1);
       setInputList(list);
-    };
-    const handleAddClick = () => {
-      setInputList([...inputList, {Question:"",Option1:"",Option2:"",Option3:"",Option4:"",Answer:"",Marks:2}]);
-    };
+  };
+  const handleAddClick = () => {
+      setInputList([...inputList, {Question:"",Option1:"",Option2:"",Option3:"",Option4:"",Answer:"",Marks:2,Type:"1"}]);
+  };
+  const handleRuleChange = (e, index) => {
+    const { name, value } = e.target;
+    const list = [...rulesList];
+    list[index][name] = value;
+    setRulesList(list);
+  };
+  const handleRemoveRule = index => {
+      const list = [...rulesList];
+      list.splice(index, 1);
+      setRulesList(list);
+  };
+  const handleAddRule = () => {
+      setRulesList([...rulesList, {Type:"1",Number:-1}]);
+  };
   return (
     <Modal
       {...props}
-      size="lg"
+      size="xl"
       scrollable
       aria-labelledby="contained-modal-title-vcenter"
       centered
@@ -35,8 +49,95 @@ function CreateTestModal(props) {
           Create Test
         </Modal.Title>
       </Modal.Header>
-          <Modal.Body>
-          <Form onSubmit={(event) => {
+      <Modal.Body>
+        <Form>
+          <Form.Group controlId="formBasicText">
+              <Form.Control id="TestName" type="text" className="form-control" placeholder="Test Name"  required />
+          </Form.Group>
+          <Row>
+            <Col>
+              <Form.Group controlId="formBasicText">
+                <Form.Control id="Duration" type="text" className="form-control" Value="hr:min:sec" required />
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group controlId="formBasicText">
+                <Form.Control id="Max" type="number" className="form-control" placeholder="Maximum Marks" required />
+              </Form.Group>
+            </Col>
+          </Row>
+          {inputList.map((x, i) => {
+            return (
+              <Form.Group controlId="formBasicText">
+                <Form.Label>Question</Form.Label>
+                <Form.Control id="Question" name="Question" type="text" className="form-control" placeholder="Enter the question."  required onChange={e => handleInputChange(e, i)} />
+                <br/>
+                <Row>
+                  <Col>
+                    <Form.Control placeholder="Option 1" name="Option1" required  onChange={e => handleInputChange(e, i)} />
+                  </Col>
+                  <Col>
+                    <Form.Control placeholder="Option 2" name="Option2" required   onChange={e => handleInputChange(e, i)} />
+                  </Col>
+                </Row>
+                <br/>
+                <Row>
+                  <Col>
+                    <Form.Control placeholder="Option 3"name="Option3" required  onChange={e => handleInputChange(e, i)} />
+                  </Col>
+                  <Col>
+                    <Form.Control placeholder="Option 4" name="Option4" required  onChange={e => handleInputChange(e, i)} />
+                  </Col>
+                </Row>
+                <br/>
+                <Row>
+                  <Col>
+                    <Form.Control placeholder="Answer" name="Answer" required  onChange={e => handleInputChange(e, i)} />
+                  </Col>
+                  <Col>
+                    <Form.Control type="text" name="Type" placeholder="Type of question if required "  onChange={e => handleInputChange(e, i)} />
+                  </Col>
+                  <Col>
+                    <Form.Control type="number" name="Marks" placeholder="Marks " required  onChange={e => handleInputChange(e, i)} />
+                  </Col>
+                </Row>
+                <br/>
+                <Row>
+                  <Col>
+                    {inputList.length !== 1 && <Button variant="danger" className="mr10" onClick={() => handleRemoveClick(i)}>Remove Question</Button>}
+                    {inputList.length - 1 === i && <Button id="button" onClick={handleAddClick}>Add Question</Button>}
+                  </Col>
+                </Row>
+              </Form.Group>
+            );
+          })}
+          {rulesList.map((x, i) => {
+            return (
+              <Form.Group controlId="formBasicText">
+                <Form.Label>Rules</Form.Label>
+                <Row>
+                  <Col>
+                    <Form.Control placeholder="Type of question" name="Type" onChange={e => handleRuleChange(e, i)} />
+                  </Col>
+                  <Col>
+                    <Form.Control type="number" placeholder="Number of question to be selected " name="Numbers" onChange={e => handleRuleChange(e, i)} />
+                  </Col>
+                </Row>
+                <br/>
+                <Row>
+                  <Col>
+                    {rulesList.length !== 1 && <Button variant="danger"  className="mr10" onClick={() => handleRemoveRule(i)}>Remove Rule</Button>}
+                    {rulesList.length - 1 === i && <Button id="button" onClick={handleAddRule}>Add Rule</Button>}
+                  </Col>
+                </Row>
+              </Form.Group>
+            );
+          })}
+          
+        </Form>
+      </Modal.Body>
+      <Modal.Footer>
+          <Button variant="success" type="submit" onClick={(event) => {
                       event.preventDefault()
                       const Name = document.getElementById("TestName").value
                       const Duration = document.getElementById("Duration").value
@@ -44,91 +145,21 @@ function CreateTestModal(props) {
                       
                       let x = props.createTest(Name,Duration,Max,inputList)
                       props.onHide();
-                    }}>
-            <Form.Group controlId="formBasicText">
-              <Form.Control id="TestName" type="text" className="form-control" placeholder="Test Name"  required />
-            </Form.Group>
-            <Row>
-              <Col>
-              <Form.Group controlId="formBasicText">
-              <Form.Control id="Duration" type="text" className="form-control" Value="hr:min:sec" required />
-            </Form.Group>
-            </Col>
-            <Col>
-            <Form.Group controlId="formBasicText">
-              <Form.Control id="Max" type="number" className="form-control" placeholder="Maximum Marks" required />
-            </Form.Group>
-              </Col>
-            </Row>
-        {inputList.map((x, i) => {
-          return (
-            <Form.Group controlId="formBasicText">
-              <Form.Label>Question</Form.Label>
-            <Form.Control id="Question" name="Question" type="text" className="form-control" placeholder="Enter the question."  required onChange={e => handleInputChange(e, i)} />
-            <br/>
-            <Row>
-              <Col>
-            <Form.Control placeholder="Option 1" name="Option1" required  onChange={e => handleInputChange(e, i)} />
-            </Col>
-            <Col>
-            <Form.Control placeholder="Option 2" name="Option2" required   onChange={e => handleInputChange(e, i)} />
-            </Col>
-            </Row><br/>
-            <Row>
-              <Col>
-            <Form.Control placeholder="Option 3"name="Option3" required  onChange={e => handleInputChange(e, i)} />
-            </Col>
-            <Col>
-            <Form.Control placeholder="Option 4" name="Option4" required  onChange={e => handleInputChange(e, i)} />
-            </Col>
-            </Row>
-            <br/>
-            <Row>
-              <Col>
-            <Form.Control placeholder="Answer" name="Answer" required  onChange={e => handleInputChange(e, i)} />
-            </Col>
-            <Col>
-            <Form.Control type="number" name="Marks" placeholder="Marks" required  onChange={e => handleInputChange(e, i)} />
-            </Col>
-            </Row>
-            <br/>
-            <Row>
-            <Col>
-            {inputList.length !== 1 && <Button
-                  className="mr10"
-                  onClick={() => handleRemoveClick(i)}>Remove</Button>}
-            </Col>
-            <Col>
-            {inputList.length - 1 === i && <Button onClick={handleAddClick}>Add</Button>}
-            </Col>
-            </Row>
-            </Form.Group>
-          );
-        })}
-         <Button variant="primary" type="submit">
-              Submit
-            </Button>
-        </Form>
-        </Modal.Body>
-          <Modal.Footer>
-         
-            <Button onClick={props.onHide}>Close</Button>
-          </Modal.Footer>
+        }}>
+            Submit
+          </Button>
+        <Button onClick={props.onHide}>Close</Button>
+      </Modal.Footer>
     </Modal>
   );
 }
 
 function TestModal(props) {
   const [modalShow, setModalShow] = React.useState(false);
-
   return (
     <>
       <Nav.Link id="nav-link"  onClick={() =>  setModalShow(true)}><span> Create Test</span></Nav.Link>
-      <CreateTestModal
-        show={modalShow}
-        createTest={props.createTest}
-        onHide={() => setModalShow(false)}
-      />
+      <CreateTestModal show={modalShow} createTest={props.createTest} onHide={() => setModalShow(false)} />
     </>
   );
 }
@@ -148,59 +179,55 @@ function MyVerticallyCenteredModal(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-      <Nav as="ul">
-        <Nav.Item as="li">
-          <Nav.Link onClick={() => setShow(false)} >Scores</Nav.Link>
-         </Nav.Item>
-       <Nav.Item as="li">
-        <Nav.Link onClick={() => setShow(true)} >Questions</Nav.Link>
-        </Nav.Item>
-</Nav>
+        <Nav as="ul">
+          <Nav.Item as="li">
+            <Nav.Link onClick={() => setShow(false)} >Scores</Nav.Link>
+          </Nav.Item>
+          <Nav.Item as="li">
+            <Nav.Link onClick={() => setShow(true)} >Questions</Nav.Link>
+          </Nav.Item>
+        </Nav>
         {Show?
-        <>
-         <ul>
-        { props.Marks.map((i, key) => {
+          <>
+            <ul>
+              { props.Marks.map((i, key) => {
                 return(
                   <>
-                  <li>
-                    <div className="classroom-card col-md-9 ml-auto mr-auto" key={key}>
-
-                  <h3>{i.name}</h3>  
-                  <p>{i.Marks}</p>
-                    
-                  
-                  </div>
-                  </li>
+                    <li>
+                      <div className="classroom-card col-md-9 ml-auto mr-auto" key={key}>
+                        <h3>{i.name}</h3>  
+                        <p>{i.Marks}</p>                                    
+                      </div>
+                    </li>
                   </>
                 )
               })}
-              </ul>
-        </>
-        :<>
-         <ul>
-        { props.Questions.map((i, key) => {
+            </ul>
+          </>
+          :<>
+            <ul>
+              { props.Questions.map((i, key) => {
                 return(
                   <>
-                  <li>
-                    <div className="classroom-card col-md-9 ml-auto mr-auto" key={key}>
-
-                  <h3>{i.Question}</h3>
-                  <p>{i.Marks}</p>  
-                  <Row>
-                    <Col>{i.option1}</Col>
-                    <Col>{i.option2}</Col>
-                  </Row>
-                  <Row>
-                    <Col>{i.option3}</Col>
-                    <Col>{i.option4}</Col>
-                  </Row>                                    
-                  </div>
-                  </li>
+                    <li>
+                      <div className="classroom-card col-md-9 ml-auto mr-auto" key={key}>
+                        <h3>{i.Question}</h3>
+                        <p>{i.Marks}</p>  
+                        <Row>
+                          <Col>{i.option1}</Col>
+                          <Col>{i.option2}</Col>
+                        </Row>
+                        <Row>
+                          <Col>{i.option3}</Col>
+                          <Col>{i.option4}</Col>
+                        </Row>                                    
+                      </div>
+                    </li>
                   </>
                 )
               })}
-              </ul>
-        </>
+            </ul>
+          </>
         }
       </Modal.Body>
       <Modal.Footer>
@@ -212,13 +239,12 @@ function MyVerticallyCenteredModal(props) {
 
 function App(props) {
   const [modalShow, setModalShow] = React.useState(false);
-
   return (
     <>
       <Button variant="primary" onClick={() => setModalShow(true)}>
         {props.Name}
       </Button>
-
+      
       <MyVerticallyCenteredModal
         show={modalShow}
         Marks = {props.Marks}

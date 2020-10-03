@@ -37,7 +37,7 @@ function CreateClassModal(props) {
             </Form.Group>
         </Modal.Body>
           <Modal.Footer>
-          <Button variant="primary" type="submit">
+          <Button variant="success" type="submit">
               Submit
             </Button>
             <Button onClick={props.onHide}>Close</Button>

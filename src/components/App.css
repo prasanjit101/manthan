@@ -77,3 +77,6 @@
 -moz-box-shadow: 13px 13px 5px 0px rgba(66,54,66,0.8);
 box-shadow: 13px 13px 5px 0px rgba(66, 54, 66, 0.8);
    }
+   #button{
+       margin-left: 8px;
+   }
