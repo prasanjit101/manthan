@@ -8,7 +8,7 @@ import {db} from '../firebase'
 import { useState } from "react";
 
 function CreateTestModal(props) {
-  const [inputList, setInputList] = useState([{Question:"",Option1:"",Option2:"",Option3:"",Option4:"",Answer:"",Marks:2}]);
+  const [inputList, setInputList] = useState([{question:"",option1:"",option2:"",option3:"",option4:"",answer:"",marks:2}]);
   const [rulesList, setRulesList] = useState([{Start:"",End:"",Number:""}]);
   const handleInputChange = (e, index) => {
     const { name, value } = e.target;
@@ -22,7 +22,7 @@ function CreateTestModal(props) {
       setInputList(list);
     };
     const handleAddClick = () => {
-      setInputList([...inputList, {Question:"",Option1:"",Option2:"",Option3:"",Option4:"",Answer:"",Marks:2}]);
+      setInputList([...inputList, {question:"",option1:"",option2:"",option3:"",option4:"",answer:"",marks:2}]);
     };
   return (
     <Modal
@@ -70,27 +70,27 @@ function CreateTestModal(props) {
             <br/>
             <Row>
               <Col>
-            <Form.Control placeholder="Option 1" name="Option1" required  onChange={e => handleInputChange(e, i)} />
+            <Form.Control placeholder="option 1" name="option1" required  onChange={e => handleInputChange(e, i)} />
             </Col>
             <Col>
-            <Form.Control placeholder="Option 2" name="Option2" required   onChange={e => handleInputChange(e, i)} />
+            <Form.Control placeholder="option 2" name="option2" required   onChange={e => handleInputChange(e, i)} />
             </Col>
             </Row><br/>
             <Row>
               <Col>
-            <Form.Control placeholder="Option 3"name="Option3" required  onChange={e => handleInputChange(e, i)} />
+            <Form.Control placeholder="option 3"name="option3" required  onChange={e => handleInputChange(e, i)} />
             </Col>
             <Col>
-            <Form.Control placeholder="Option 4" name="Option4" required  onChange={e => handleInputChange(e, i)} />
+            <Form.Control placeholder="option 4" name="option4" required  onChange={e => handleInputChange(e, i)} />
             </Col>
             </Row>
             <br/>
             <Row>
               <Col>
-            <Form.Control placeholder="Answer" name="Answer" required  onChange={e => handleInputChange(e, i)} />
+            <Form.Control placeholder="answer" name="answer" required  onChange={e => handleInputChange(e, i)} />
             </Col>
             <Col>
-            <Form.Control type="number" name="Marks" placeholder="Marks" required  onChange={e => handleInputChange(e, i)} />
+            <Form.Control type="number" name="marks" placeholder="marks" required  onChange={e => handleInputChange(e, i)} />
             </Col>
             </Row>
             <br/>
@@ -168,7 +168,7 @@ function MyVerticallyCenteredModal(props) {
                     <div className="classroom-card col-md-9 ml-auto mr-auto" key={key}>
 
                   <h3>{i.name}</h3>  
-                  <p>{i.Marks}</p>
+                  <p>{i.marks}</p>
                     
                   
                   </div>
@@ -186,8 +186,8 @@ function MyVerticallyCenteredModal(props) {
                   <li>
                     <div className="classroom-card col-md-9 ml-auto mr-auto" key={key}>
 
-                  <h3>{i.Question}</h3>
-                  <p>{i.Marks}</p>  
+                  <h3>{i.question}</h3>
+                  <p>{i.marks}</p>  
                   <Row>
                     <Col>{i.option1}</Col>
                     <Col>{i.option2}</Col>
@@ -223,9 +223,9 @@ function App(props) {
 
       <MyVerticallyCenteredModal
         show={modalShow}
-        Marks = {props.Marks}
-        Name = {props.Name}
-        Questions = {props.Questions}
+        Marks = {props.marks}
+        Name = {props.name}
+        Questions = {props.questions}
         onHide={() => setModalShow(false)}
       />
     </>
@@ -244,14 +244,14 @@ class Classsroom extends Component {
     this.onlogin = this.onlogin.bind(this);
 	this.createTest= this.createTest.bind(this);
   } 
-  createTest(Name,Duration,Max,inputList){
+  createTest(name,duration,max,inputList){
 	  
 	var emailId= this.state.userdata.getEmail().replaceAll(".","dot");
-	var code='CO205';
+	var code='co205';
 	var testCode='test01';
 	//the variable code is the classroom code of the teacher and testCode is the test code
 	
-	db.ref('Educator').child(emailId).child(code).child("Class").child(testCode).set({name:Name,duration:Duration,maxnumber:Max,questions:inputList});
+	db.ref('educator').child(emailId).child(code).child('test').child(testCode).set({name:name,duration:duration,maxNumber:max,questions:inputList});
   }
   setModalShow(flag){
     this.setState({modalShow:flag});
@@ -298,7 +298,7 @@ class Classsroom extends Component {
             return(
                 <>
                   <Col key={key}>
-                    <App Questions={Test.Questions} Marks={Test.Marks} Name={Test.Name}/>
+                    <App Questions={Test.questions} Marks={Test.marks} Name={Test.name}/>
                   </Col>
                 </>
               )
