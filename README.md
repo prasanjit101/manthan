@@ -43,13 +43,17 @@
         Android app to give online tests.
 
 ## Screenshots
-<div align="center" class="row">
-<img src="1.png" height="400" padding="50">
-<img src="2.png" height="400" padding="50">
-<img src="3.png" height="400" padding="50">
-<img src="4.png" height="400" padding="50">
-<img src="5.png" height="400" padding="50">
-</div>
+### Screenshot 1
+![](1.png "")
+### Screenshot 2
+![](2.png "")
+### Screenshot 3
+![](3.png "")
+### Screenshot 4
+![](4.png "")
+### Screenshot 5
+![](5.png "")
+
 
 
 ## Authors
