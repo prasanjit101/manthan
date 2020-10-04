@@ -39,7 +39,7 @@
         Install required dependencies.
 - ### `npm start`
         Runs the app in the development mode.
-- ### Download app from [here]()
+- ### Download app from [here](https://github.com/prasanjit101/manthan/tree/main/Android-app)
         Android app to give online tests.
 
 ## Screenshots
