@@ -1,1 +1,2 @@
-This is the android app for the "Manthan" project
+## Github repository
+[Android App for students and teachers](https://github.com/kartikpapney/ManthanApp).
