@@ -26,7 +26,7 @@
 
 ## Technologies Used 
 - ### Reactjs to develop admin pannel for educators
-- ### Firestore 
+- ### Firebase Database
 - ### Java SDK to develop android application for students
 
 ## Live App 
