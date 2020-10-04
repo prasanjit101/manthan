@@ -65,7 +65,7 @@ function ClassModal(props) {
 class App extends Component {
   state = {
     userdata : [],
-    Classrooms:[],
+    Classrooms:[{code:'CS205',name:'Data Structures'},{code:'CS225',name:'Machine Learning'},{code:'CS309',name:'Graph Theroy'},{code:'CS708',name:'Mobile Computing'}],
     isLoggedin: false
   }
   constructor(props) {
@@ -73,6 +73,13 @@ class App extends Component {
     this.onlogin = this.onlogin.bind(this);
     this.createClass = this.createClass.bind(this);
   } 
+  GetClass(){
+    var id = this.state.userdata.getEmail() + "";
+      var emailId = id.replaceAll(".", "Dot");
+    db.ref("educator").child(emailId).on('value', function(snapshot) {
+      this.setState({Classrooms:snapshot.val()});
+    });
+    }
   onlogin(profile){
     this.setState({isLoggedin:true, userdata:profile})
     //check user  
@@ -81,7 +88,9 @@ class App extends Component {
     console.log('ID: ' + this.state.userdata.getId()); // Do not send to your backend! Use an ID token instead.
     console.log('Name: ' + this.state.userdata.getName());
     console.log('Image URL: ' + this.state.userdata.getImageUrl());
-    console.log('Email: ' + this.state.userdata.getEmail()); // This is null if the 'email' scope is not present.
+    console.log('Email: ' + this.state.userdata.getEmail()); 
+    //this.GetClass();
+    // This is null if the 'email' scope is not present.
   }
 
   createClass(Name,Code){
@@ -94,10 +103,7 @@ class App extends Component {
     , className: Name, classCode: Code});  
   }
   
-  GetClass(){
-	/* db.ref()
-	this.setState({Classrooms:}) */
-  }
+ 
   render() {
     return (
       <div>
@@ -111,7 +117,7 @@ class App extends Component {
       </Nav>
       </Navbar.Collapse>
       </Navbar>
-      <Main userdata={this.state.userdata}/>        
+      <Main userdata={this.state.userdata} Classrooms={this.state.Classrooms}/>        
       </div>
     );
   }

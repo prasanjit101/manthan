@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
-import {Navbar,Nav,NavDropdown,Modal,Form,Button,Row,Col} from 'react-bootstrap';
+import {Navbar,Nav,NavDropdown,Dropdown,Modal,Form,Button,Row,Col, Container} from 'react-bootstrap';
 import GoogleBtn from './Login';
-import {db} from '../firebase'
+import {db} from '../firebase';
+
+import { Link} from "react-router-dom";
+
 
 
 import { useState } from "react";
@@ -59,11 +62,25 @@ function CreateTestModal(props) {
           <Row>
             <Col>
               <Form.Group controlId="formBasicText">
+              <Form.Label>Exam Duration</Form.Label>
                 <Form.Control id="Duration" type="text" className="form-control" Value="hr:min:sec" required />
               </Form.Group>
             </Col>
             <Col>
               <Form.Group controlId="formBasicText">
+              <Form.Label>Exam Date</Form.Label>
+                <Form.Control id="Date" type="date" className="form-control" placeholder="Examination Date" required />
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group controlId="formBasicText">
+              <Form.Label>Exam Time</Form.Label>
+                <Form.Control id="Time" type="time" className="form-control" placeholder="Examination Time" required />
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group controlId="formBasicText">
+              <Form.Label>Maximum Marks</Form.Label>
                 <Form.Control id="Max" type="number" className="form-control" placeholder="Maximum Marks" required />
               </Form.Group>
             </Col>
@@ -144,8 +161,10 @@ function CreateTestModal(props) {
                       const Name = document.getElementById("TestName").value
                       const Duration = document.getElementById("Duration").value
                       const Max = document.getElementById("Max").value
+                      const Date = document.getElementById("Date").value
+                      const Time = document.getElementById("Time").value
                       
-                      let x = props.createTest(Name,Duration,Max,inputList)
+                      let x = props.createTest(Name,Date,Time,Duration,Max,inputList)
                       props.onHide();
         }}>
             Submit
@@ -261,26 +280,29 @@ function App(props) {
 class Classsroom extends Component {
   state = {
     Tests:[],
+    test:[],
+    show:false,
     userdata : [],
-    isLoggedin: false,
-    classrooms:[]
-  }
+    isLoggedin: false
+    }
   constructor(props) {
     super(props);
     this.onlogin = this.onlogin.bind(this);
 	this.createTest= this.createTest.bind(this);
   } 
-  createTest(name,duration,max,inputList){
+  createTest(name,date,time,duration,max,inputList,rules){
 	  
 	var emailId= this.state.userdata.getEmail().replaceAll(".","Dot");
-	var code='co205';
-	var testCode='test01';
+  var code='co205';
+  var testCode=name+date+time;
+  console.log(testCode);
 	//the variable code is the classroom code of the teacher and testCode is the test code
 	
-	db.ref('educator').child(emailId).child(code).child('test').child(testCode).set({ done:0, description: description, duration:duration, maxNumber:max, questions:inputList});
+	db.ref('educator').child(emailId).child(code).child('test').child(testCode).set({ done:0, rules: rules, duration:duration, maxNumber:max, questions:inputList});
   }
-  setModalShow(flag){
-    this.setState({modalShow:flag});
+  setShow(flag){
+    this.setState({show:flag});
+    console.log(this.state.show);
   }
   onlogin(profile){
     this.setState({isLoggedin:true, userdata:profile})
@@ -297,39 +319,203 @@ class Classsroom extends Component {
   render() {
     return (
       <div>
+        {console.log("classroom",this.props.location.classprops)}
         <Navbar sticky="top" bg="light" id="navbar" variant="light">
           <Navbar.Brand href="/"><img src="../logo.svg" width="70px"/> Manthan<span>.</span></Navbar.Brand>
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
-            <Nav className="mr-auto">
-              <NavDropdown title="Classrooms" id="basic-nav-dropdown ">
-                { this.state.classrooms.map((classroom, key) => {
-                  return(<>
-                    <div className="classroom-card col-md-9 ml-auto mr-auto" key={key}>
-                      <NavDropdown.Item href={{pathname: `/classroom/${classroom._id}`}}>{classroom.Name}</NavDropdown.Item>
-                    </div>
-                  </>
-                  );
-                })}
-              </NavDropdown>
-            </Nav>
             <Nav>
               <TestModal createTest={this.createTest}/>
               <GoogleBtn onlogin={this.onlogin}/>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
+    
         <Row>
-          { this.state.Tests.map((Test, key) => {
+          <Col xs lg="2" id="vert">
+            <ul>
+            <li>
+                  <Dropdown>
+                    <Dropdown.Toggle variant="success" id="dropdown">
+                      Test 1
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                      <Dropdown.Item onClick={() => {this.setShow(false);}}>Scores</Dropdown.Item>
+                      <Dropdown.Item onClick={() => {this.setShow(true);}}>Questions</Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </li>
+                <li>
+                  <Dropdown>
+                    <Dropdown.Toggle variant="success" id="dropdown">
+                      Test 2
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                      <Dropdown.Item onClick={() => {this.setShow(false);}}>Scores</Dropdown.Item>
+                      <Dropdown.Item onClick={() => {this.setShow(true);}}>Questions</Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </li>
+            { this.state.Tests.map((Test, key) => {
             return(
-                <>
-                  <Col key={key}>
-                    <App Questions={Test.questions} Marks={Test.marks} Name={Test.name}/>
-                  </Col>
-                </>
-              )
-            })
-          }
+                <li  key={key}>
+                  <Dropdown>
+                    <Dropdown.Toggle variant="success" id="dropdown">
+                      {Test.name}
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                    <Dropdown.Item onClick={() => {this.setShow(false);}}>Scores</Dropdown.Item>
+                    <Dropdown.Item onClick={() => {this.setShow(true);}}>Questions</Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </li>
+                 )
+                })
+              }
+            </ul>
+          </Col>
+          <Col id="vert2">
+              {
+                !this.state.show?
+                <div>
+                  <h1>Scores</h1>
+                  <ul>
+                  <li  >
+                        <Row>
+                          <Col>
+                          <h3>Aavishkar Mishra</h3>
+                          </Col>
+                          <Col>
+                            <h3>Marks: 34</h3>
+                          </Col>
+                        </Row>
+                      </li>
+                      <li >
+                        <Row>
+                          <Col>
+                          <h3>Kartik Papney</h3>
+                          </Col>
+                          <Col>
+                            <h3>Marks: 38</h3>
+                          </Col>
+                        </Row>
+                      </li>
+                  { this.state.test.map((score, key) => {
+                    return(
+                      <li  key={key}>
+                        <Row>
+                          <Col>
+                          <h3>{score.name}</h3>
+                          </Col>
+                          <Col>
+                            <h3>Marks: {score.marks}</h3>
+                          </Col>
+                        </Row>
+                      </li>
+                      )
+                    })
+                  }
+                  </ul>
+                </div>
+                :
+                <div>
+                  <h1>Questions</h1>
+                  <ol>
+                    <li>
+                   <br/> <Form>
+  <Form.Row>
+    <Col>
+      <Form.Control placeholder="Question" readOnly />
+    </Col>
+    <Col xs lg="2">
+      <Form.Control placeholder="Marks: 4" readOnly />
+    </Col>
+  </Form.Row>
+  <br/> 
+  <Form.Row>
+    <Col xs lg="2" >
+    <Form.Check type="radio" aria-label="radio 1" inline
+        disabled
+        label="Option 1" />
+        </Col>
+    <Col xs lg="2">
+    <Form.Check type="radio" aria-label="radio 1" inline
+        disabled
+        label="Option 2" />
+        </Col>
+    <Col xs lg="2">
+    <Form.Check type="radio" aria-label="radio 1" inline
+        disabled
+        label="Option 3" />
+        </Col>
+    <Col xs lg="2">
+    <Form.Check type="radio" aria-label="radio 1" inline
+        disabled
+        label="Option 4" />
+    </Col>
+  </Form.Row>
+  
+</Form>
+                        
+                      </li>
+                      <li >
+                     <br/> <Form>
+  <Form.Row>
+    <Col>
+      <Form.Control placeholder="Question" readOnly />
+    </Col>
+    <Col xs lg="2">
+      <Form.Control placeholder="Marks: 4" readOnly />
+    </Col>
+  </Form.Row>
+  <br/> 
+  <Form.Row>
+    <Col xs lg="2">
+    <Form.Check type="radio" aria-label="radio 1" inline
+        disabled
+        label="Option 1" />
+        </Col>
+    <Col xs lg="2">
+    <Form.Check type="radio" aria-label="radio 1" inline
+        disabled
+        label="Option 2" />
+    </Col>
+    <Col xs lg="2">
+    <Form.Check type="radio" aria-label="radio 1" inline
+        disabled
+        label="Option 3" />
+        </Col>
+    <Col xs lg="2">
+    <Form.Check type="radio" aria-label="radio 1" inline
+        disabled
+        label="Option 4" />
+    </Col>
+  </Form.Row>
+  
+</Form>
+                      </li>
+                  { this.state.test.map((score, key) => {
+                    return(
+                      <li  key={key}>
+                        <Row>
+                          <Col>
+                          <h3>{score.name}</h3>
+                          </Col>
+                          <Col>
+                            <h3>Marks: {score.marks}</h3>
+                          </Col>
+                        </Row>
+                      </li>
+                    )
+                  })
+                }
+                  </ol>
+
+                </div>
+              
+              }
+              
+          </Col>
         </Row>
       </div>
     );
