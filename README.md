@@ -30,7 +30,7 @@
 - ### Java SDK to develop android application for students
 
 ## Live App 
-[Android App for students and teachers]() and [Web app for teachers to add tests](https://manthan-app.herokuapp.com/).
+[Android App for students and teachers](https://github.com/kartikpapney/ManthanApp) and [Web app for teachers to add tests](https://manthan-app.herokuapp.com/).
 
 ## Installing on Local Host
 - ### `git clone https://github.com/prasanjit101/manthan.git`
